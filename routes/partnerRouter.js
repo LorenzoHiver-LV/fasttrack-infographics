@@ -1,6 +1,6 @@
 var router = require('express').Router();
 var Partner = require('./../models/Partner');
-const {success, error} = require('./../utils/functions');
+const {success, error, formatString} = require('./../utils/functions');
 
 router.route('/')
 
@@ -33,6 +33,9 @@ router.route('/')
         partner.location = formatString(req.body.location);
         partner.ifIWas = formatString(req.body.ifIWas);
         partner.image = req.body.image;
+        partner.skills = req.body.skills;
+        partner.hobbies = req.body.hobbies;
+        partner.chinesePortrait = req.body.chinesePortrait;
 
         partner.save((err) => {
             if(err){
@@ -55,12 +58,5 @@ router.route('/:id')
             }
         })
     });
-
-function formatString(string)
-{
-    if (typeof string == "string") {
-        return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase() ;
-    }
-}
 
 module.exports = router;

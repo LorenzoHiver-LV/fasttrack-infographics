@@ -26,9 +26,9 @@ var partnerSchema = new Schema({
         type: String,
         required: true
     },
-    // skills: [String],
-    // hobbies: [String],
-    // chinesePortrait: [String],
+    skills: [String],
+    hobbies: [String],
+    chinesePortrait: [String],
 });
 
 var Partner = mongoose.model('partner', partnerSchema);
