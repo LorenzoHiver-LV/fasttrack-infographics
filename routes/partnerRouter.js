@@ -1,6 +1,6 @@
 var router = require('express').Router();
 var Partner = require('./../models/Partner');
-const {success, error, formatString} = require('./../utils/functions');
+const { success, error, formatString } = require('./../utils/functions');
 
 router.route('/')
 
@@ -13,32 +13,34 @@ router.route('/')
         })
     })
 
-    .post( async (req,res) => {
+    .post(async (req, res) => {
         let same = false;
 
-        await Partner.findOne({ name: formatString(req.body.name) }, (err, partner) => {
+        await Partner.findOne({ firstName: formatString(req.body.firstName) }, (err, partner) => {
             if (partner) {
                 same = true;
             }
         });
-        console.log(same);
 
         if (same) {
             return res.json(error("This name is already taken"))
         }
 
-        let partner = new Partner();
-        partner.name = formatString(req.body.name);
+        const partner = new Partner();
+        partner.firstName = formatString(req.body.firstName);
+        partner.lastName = formatString(req.body.lastName);
         partner.job = req.body.job.toUpperCase();
         partner.location = formatString(req.body.location);
         partner.ifIWas = formatString(req.body.ifIWas);
+        partner.incredible = formatString(req.body.incredible);
+        partner.birthday = req.body.birthday;
         partner.image = req.body.image;
         partner.skills = req.body.skills;
         partner.hobbies = req.body.hobbies;
         partner.chinesePortrait = req.body.chinesePortrait;
 
         partner.save((err) => {
-            if(err){
+            if (err) {
                 res.json(err);
             }
             res.json(success(partner));
@@ -46,7 +48,6 @@ router.route('/')
     });
 
 router.route('/:id')
-
     .get((req, res) => {
         Partner.findOne({ _id: req.params.id }, (err, partner) => {
             try {

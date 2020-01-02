@@ -1,5 +1,5 @@
 {
   "ROOT_API": "/api",
-  "HOST": 3000,
+  "HOST": 8080,
   "DATABASE_URL": "mongodb://127.0.0.1:27017/fasttractOctobre"
 }

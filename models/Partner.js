@@ -1,8 +1,12 @@
 const mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-var partnerSchema = new Schema({
-    name: {
+const partnerSchema = new Schema({
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
         type: String,
         required: true
     },
@@ -15,8 +19,8 @@ var partnerSchema = new Schema({
         required: true
     },
     birthday: {
-        type: Date,
-        default: Date.now
+        type: String,
+        required: true,
     },
     image: {
         type: String,
@@ -26,11 +30,19 @@ var partnerSchema = new Schema({
         type: String,
         required: true
     },
-    skills: [String],
-    hobbies: [String],
+    incredible: {
+        type: String,
+        required: true
+    },
+    skills: [{
+        name: String,
+    }],
+    hobbies: [{
+        name : String,
+    }],
     chinesePortrait: [String],
 });
 
-var Partner = mongoose.model('partner', partnerSchema);
+const Partner = mongoose.model('partner', partnerSchema);
 
 module.exports = Partner;
